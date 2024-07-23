@@ -1,5 +1,5 @@
 import './App.css';
-import { User } from './User';
+//import { User } from './User';
 import { useState } from "react";
 
 function App() {
@@ -267,11 +267,51 @@ return (
 
 //==================================================================================
 //5. Creacion de un CRUD (como una base de datos donde podremos crear y eliminar informacion; (O lo que es lo mismo, actualizar su informacion))
+//A continuacion, vamos a construir una "app" para administrarnos tareas, donde el verde nos indicara que esta completada, y si sigue
+//en blanco, significara que esta en progreso/sin completar
 
 
+//metemos 1 div dentro de otro div, ya que vamos a dividir en 2 la pagina.
+//*importante meter en este caso el import del useState arriba del todo.
+//el valor inicial que le damos a useState es un array vacio*
+const [todoList, setTodoList] = useState([]);
+const [newTask, setNewTask] = useState("");
+
+const handleChange = (event) => {
+  setNewTask(event.target.value);
+};
+
+//Lo que significa ...todoList , los tres puntos, es un operador que pilla todas las palabras que contengan esa parte inicial
+//y despues el todoList
+const addTask = () => {
+  const newTodoList = [...todoList, newTask];
+  setTodoList(newTodoList);
+};
+
+//*Se podria meter todo lo de newTodoList en setTodoList y ahorrarnos 1 linea de codigo, pero lo pongo asi para que sea mas visual
+//setTodoList([...todoList, newTask]);
 
 
- 
+return (
+  <div className="App">
+    <div className="addTask">
+      <input onChange={handleChange} />
+      <button onClick={addTask}> Add task </button>
+    </div>
+    <div className="list">
+      {todoList.map((task) => {
+        return (
+        <div>
+          <h1>{task}</h1>
+        </div>
+      );
+      })}
+    </div>
+  </div>
+);
+
+//Hasta el minuto 15:47 del course [5]; lo siguiente es deletear las tareas.
+
 //==================================================================================
 //==================================================================================
 //==================================================================================
