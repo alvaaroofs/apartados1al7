@@ -1,5 +1,7 @@
 import './App.css';
 import { User } from './User';
+import { useState } from "react";
+
 function App() {
 //Para llamar al componente User, se haria de forma abreviada <User />
 //Para crear componentes y asignar valor a las variables, se hace con const (nombre **primera en mayuscula) = () => {};
@@ -171,11 +173,13 @@ return (
 
 //==================================================================================
 //4. UseStates
-let age = 0;  //Usaremos let, ya que const es para variables constantes
+//Declaramos al inicio el siguiente import: import { useState } from "react";
+//Con este codigo, haremos un boton que cada vez que le demos un clic, se incrementara en +1, (o en -1 si en setAge hemos puesto setAge(age -1);).
+
+/*const [age, setAge] = useState(0);
 
 const increaseAge = () => {
-  age = age +1;
-  console.log(age);
+  setAge(age + 1);
 };
 
 return (
@@ -183,15 +187,91 @@ return (
     {age}
     <button onClick={increaseAge}> Increase Age </button>
   </div>
-);
+);*/
 
 
 
 
+//Ahora, trabajaremos con inputs: (donde podremos introducir informacion por teclado, y nos la ira mostrando por pantalla):
+
+/*const [inputValue, setInputValue] = useState("");
+
+const handleInputChange = (event) => {
+  setInputValue(event.target.value);
+}; 
+
+return (
+  <div className="App">
+    <input type="text" onChange={handleInputChange} />
+    {inputValue}
+  </div>
+);*/
+
+//Implementaremos show/hide para un mensaje:
+
+  /*const [showText, setShowText] = useState(true);
+
+  //Importante meter el showText con el ! ya que sera lo que nos cambie de true a false, y de false a true.
+  return (
+    <div className="App">
+      <button onClick={() => {setShowText(!showText)}}> Press to show/hide </button> 
+      {showText && <h1>ola k ase</h1>}
+    </div>
+  );*/
+
+
+  //Cada vez que le demos clic, cambiaremos de negro a red, y de red a negro:
+
+  /*const [textColor, setTextColor] = useState("black");
+
+  return (
+    <div className="App">
+      <button 
+      onclick={() => {
+        setTextColor(textColor === "black" ? "red" : "black");
+      }}
+      >
+        Change color/Set it to default
+      </button>
+      <h1 style={{ color: textColor }}> MENSAJE POR PANTALLA </h1>
+    </div>
+  );*/
+
+  //Por ultimo, haremos un contador con opcion a incrementar, decrementar y set to zero:
+
+  /*const [count, setCount] = useState(0);
+
+  const increase = () => {
+    setCount(count + 1);
+  };
+
+  const decrease = () => {
+    setCount(count - 1);
+  };
+
+  const setToZero = () => {
+    setCount(0);
+  };
+
+  return (
+    <div className="App">
+      <button onClick={increase}>Increment</button>
+      <button onClick={decrease}>Decrement</button>
+      <button onClick={setToZero}>Set counter to 0</button>
+
+    {count}
+    </div>
+  );*/
 
 
 
 //==================================================================================
+//5. Creacion de un CRUD (como una base de datos donde podremos crear y eliminar informacion; (O lo que es lo mismo, actualizar su informacion))
+
+
+
+
+ 
 //==================================================================================
 //==================================================================================
 //==================================================================================
