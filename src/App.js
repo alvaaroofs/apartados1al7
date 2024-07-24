@@ -1,6 +1,7 @@
 import './App.css';
 //import { User } from './User';
 import { useState } from "react";
+import { Task } from "./Task";
 
 function App() {
 //Para llamar al componente User, se haria de forma abreviada <User />
@@ -284,13 +285,37 @@ const handleChange = (event) => {
 //Lo que significa ...todoList , los tres puntos, es un operador que pilla todas las palabras que contengan esa parte inicial
 //y despues el todoList
 const addTask = () => {
-  const newTodoList = [...todoList, newTask];
-  setTodoList(newTodoList);
+const task = {
+  id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+  taskName: newTask,
+  completed: false,
+};
+  setTodoList(task.taskName !== "" ? [...todoList, task] : todoList);
 };
 
 //*Se podria meter todo lo de newTodoList en setTodoList y ahorrarnos 1 linea de codigo, pero lo pongo asi para que sea mas visual
 //setTodoList([...todoList, newTask]);
 
+const deleteTask = (id) => {
+  //Con el componente que hemos creado, si task es igual a taskname, retornara falso, si es distinto, retornara true
+  setTodoList(todoList.filter((task) => task.id !== id));
+};
+
+const completeTask = (id) => {
+  setTodoList(
+    todoList.map((task) => {
+      if (task.id === id){
+        return { 
+          ...task, 
+          completed: true
+        };
+      } else {
+        return task;
+      }
+    }
+    )
+  );
+};
 
 return (
   <div className="App">
@@ -301,16 +326,22 @@ return (
     <div className="list">
       {todoList.map((task) => {
         return (
-        <div>
-          <h1>{task}</h1>
-        </div>
+        <Task
+          taskName={task.taskName}
+          id={task.id}
+          completed={task.completed}
+          deleteTask={deleteTask}
+          completeTask={completeTask}
+        />
       );
       })}
     </div>
   </div>
 );
 
-//Hasta el minuto 15:47 del course [5]; lo siguiente es deletear las tareas.
+//Se ha creado el componente Task.js para acortar codigo del App.js, y se ha modificado
+//el App.css para implementar colores acorde a la logica que he aplicado anteriormente
+
 
 //==================================================================================
 //==================================================================================
